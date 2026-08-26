@@ -707,6 +707,68 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      anular_venta: {
+        Args: { p_motivo: string; p_venta_id: string }
+        Returns: undefined
+      }
+      caja_abierta_actual: { Args: never; Returns: string }
+      cerrar_caja: {
+        Args: {
+          p_caja_id: string
+          p_monto_contado: number
+          p_observaciones?: string
+        }
+        Returns: {
+          abierta_at: string
+          abierta_por: string | null
+          cerrada_at: string | null
+          cerrada_por: string | null
+          diferencia: number | null
+          estado: string
+          id: string
+          monto_contado: number | null
+          monto_inicial: number
+          observaciones: string | null
+          total_esperado: number | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "cajas"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      confirmar_compra: { Args: { p_compra_id: string }; Returns: undefined }
+      crear_venta: {
+        Args: {
+          p_descuento?: number
+          p_items: Json
+          p_metodo: Database["public"]["Enums"]["metodo_pago"]
+          p_observaciones?: string
+        }
+        Returns: {
+          anulada_at: string | null
+          anulada_por: string | null
+          caja_id: string | null
+          descuento: number
+          estado: Database["public"]["Enums"]["estado_venta"]
+          fecha: string
+          id: string
+          metodo_pago: Database["public"]["Enums"]["metodo_pago"]
+          motivo_anulacion: string | null
+          numero: string
+          observaciones: string | null
+          subtotal: number
+          total: number
+          usuario_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "ventas"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -715,6 +777,24 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: never; Returns: boolean }
+      log_auditoria: {
+        Args: {
+          _accion: string
+          _descripcion: string
+          _modulo: string
+          _registro: string
+        }
+        Returns: undefined
+      }
+      registrar_movimiento_stock: {
+        Args: {
+          p_cantidad: number
+          p_motivo: string
+          p_producto_id: string
+          p_tipo: Database["public"]["Enums"]["tipo_mov_stock"]
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "vendedor"
