@@ -711,6 +711,10 @@ export type Database = {
         Args: { p_motivo: string; p_venta_id: string }
         Returns: undefined
       }
+      bootstrap_usuario: {
+        Args: { p_apellido: string; p_email: string; p_nombre: string }
+        Returns: Database["public"]["Enums"]["app_role"]
+      }
       caja_abierta_actual: { Args: never; Returns: string }
       cerrar_caja: {
         Args: {
