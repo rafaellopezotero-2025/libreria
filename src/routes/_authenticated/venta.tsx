@@ -110,7 +110,7 @@ export function Carrito({
       })),
       p_metodo: metodo as never,
       p_descuento: desc,
-      p_observaciones: obs || null,
+      p_observaciones: obs || undefined,
     });
     setGuardando(false);
     if (error) {
