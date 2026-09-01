@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedFotocopiasRouteImport } from './routes/_authenticated/fotocopias'
 import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
 import { Route as AuthenticatedVentaRouteImport } from './routes/_authenticated/venta'
 
@@ -29,6 +30,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedFotocopiasRoute = AuthenticatedFotocopiasRouteImport.update({
+  id: '/fotocopias',
+  path: '/fotocopias',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPanelRoute = AuthenticatedPanelRouteImport.update({
   id: '/panel',
   path: '/panel',
@@ -43,12 +49,14 @@ const AuthenticatedVentaRoute = AuthenticatedVentaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/panel': typeof AuthenticatedPanelRoute
   '/venta': typeof AuthenticatedVentaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/panel': typeof AuthenticatedPanelRoute
   '/venta': typeof AuthenticatedVentaRoute
 }
@@ -57,19 +65,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/_authenticated/panel': typeof AuthenticatedPanelRoute
   '/_authenticated/venta': typeof AuthenticatedVentaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/panel' | '/venta'
+  fullPaths: '/' | '/auth' | '/fotocopias' | '/panel' | '/venta'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/panel' | '/venta'
+  to: '/' | '/auth' | '/fotocopias' | '/panel' | '/venta'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/fotocopias'
     | '/_authenticated/panel'
     | '/_authenticated/venta'
   fileRoutesById: FileRoutesById
@@ -103,6 +113,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/fotocopias': {
+      id: '/_authenticated/fotocopias'
+      path: '/fotocopias'
+      fullPath: '/fotocopias'
+      preLoaderRoute: typeof AuthenticatedFotocopiasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/panel': {
       id: '/_authenticated/panel'
       path: '/panel'
@@ -121,11 +138,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedFotocopiasRoute: typeof AuthenticatedFotocopiasRoute
   AuthenticatedPanelRoute: typeof AuthenticatedPanelRoute
   AuthenticatedVentaRoute: typeof AuthenticatedVentaRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedFotocopiasRoute: AuthenticatedFotocopiasRoute,
   AuthenticatedPanelRoute: AuthenticatedPanelRoute,
   AuthenticatedVentaRoute: AuthenticatedVentaRoute,
 }
