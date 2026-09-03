@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedFotocopiasRouteImport } from './routes/_authenticated/fotocopias'
 import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
 import { Route as AuthenticatedProductosRouteImport } from './routes/_authenticated/productos'
+import { Route as AuthenticatedProveedoresRouteImport } from './routes/_authenticated/proveedores'
 import { Route as AuthenticatedReposicionRouteImport } from './routes/_authenticated/reposicion'
 import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
 import { Route as AuthenticatedVentaRouteImport } from './routes/_authenticated/venta'
@@ -49,6 +50,12 @@ const AuthenticatedProductosRoute = AuthenticatedProductosRouteImport.update({
   path: '/productos',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProveedoresRoute =
+  AuthenticatedProveedoresRouteImport.update({
+    id: '/proveedores',
+    path: '/proveedores',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedReposicionRoute = AuthenticatedReposicionRouteImport.update({
   id: '/reposicion',
   path: '/reposicion',
@@ -76,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/panel': typeof AuthenticatedPanelRoute
   '/productos': typeof AuthenticatedProductosRoute
+  '/proveedores': typeof AuthenticatedProveedoresRoute
   '/reposicion': typeof AuthenticatedReposicionRoute
   '/stock': typeof AuthenticatedStockRoute
   '/venta': typeof AuthenticatedVentaRoute
@@ -87,6 +95,7 @@ export interface FileRoutesByTo {
   '/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/panel': typeof AuthenticatedPanelRoute
   '/productos': typeof AuthenticatedProductosRoute
+  '/proveedores': typeof AuthenticatedProveedoresRoute
   '/reposicion': typeof AuthenticatedReposicionRoute
   '/stock': typeof AuthenticatedStockRoute
   '/venta': typeof AuthenticatedVentaRoute
@@ -100,6 +109,7 @@ export interface FileRoutesById {
   '/_authenticated/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/_authenticated/panel': typeof AuthenticatedPanelRoute
   '/_authenticated/productos': typeof AuthenticatedProductosRoute
+  '/_authenticated/proveedores': typeof AuthenticatedProveedoresRoute
   '/_authenticated/reposicion': typeof AuthenticatedReposicionRoute
   '/_authenticated/stock': typeof AuthenticatedStockRoute
   '/_authenticated/venta': typeof AuthenticatedVentaRoute
@@ -113,6 +123,7 @@ export interface FileRouteTypes {
     | '/fotocopias'
     | '/panel'
     | '/productos'
+    | '/proveedores'
     | '/reposicion'
     | '/stock'
     | '/venta'
@@ -124,6 +135,7 @@ export interface FileRouteTypes {
     | '/fotocopias'
     | '/panel'
     | '/productos'
+    | '/proveedores'
     | '/reposicion'
     | '/stock'
     | '/venta'
@@ -136,6 +148,7 @@ export interface FileRouteTypes {
     | '/_authenticated/fotocopias'
     | '/_authenticated/panel'
     | '/_authenticated/productos'
+    | '/_authenticated/proveedores'
     | '/_authenticated/reposicion'
     | '/_authenticated/stock'
     | '/_authenticated/venta'
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProductosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/proveedores': {
+      id: '/_authenticated/proveedores'
+      path: '/proveedores'
+      fullPath: '/proveedores'
+      preLoaderRoute: typeof AuthenticatedProveedoresRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/reposicion': {
       id: '/_authenticated/reposicion'
       path: '/reposicion'
@@ -227,6 +247,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedFotocopiasRoute: typeof AuthenticatedFotocopiasRoute
   AuthenticatedPanelRoute: typeof AuthenticatedPanelRoute
   AuthenticatedProductosRoute: typeof AuthenticatedProductosRoute
+  AuthenticatedProveedoresRoute: typeof AuthenticatedProveedoresRoute
   AuthenticatedReposicionRoute: typeof AuthenticatedReposicionRoute
   AuthenticatedStockRoute: typeof AuthenticatedStockRoute
   AuthenticatedVentaRoute: typeof AuthenticatedVentaRoute
@@ -237,6 +258,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedFotocopiasRoute: AuthenticatedFotocopiasRoute,
   AuthenticatedPanelRoute: AuthenticatedPanelRoute,
   AuthenticatedProductosRoute: AuthenticatedProductosRoute,
+  AuthenticatedProveedoresRoute: AuthenticatedProveedoresRoute,
   AuthenticatedReposicionRoute: AuthenticatedReposicionRoute,
   AuthenticatedStockRoute: AuthenticatedStockRoute,
   AuthenticatedVentaRoute: AuthenticatedVentaRoute,
