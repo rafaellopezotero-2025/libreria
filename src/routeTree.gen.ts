@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedFotocopiasRouteImport } from './routes/_authenticated/fotocopias'
 import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
 import { Route as AuthenticatedProductosRouteImport } from './routes/_authenticated/productos'
+import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
 import { Route as AuthenticatedVentaRouteImport } from './routes/_authenticated/venta'
 import { Route as AuthenticatedVentasRouteImport } from './routes/_authenticated/ventas'
 
@@ -47,6 +48,11 @@ const AuthenticatedProductosRoute = AuthenticatedProductosRouteImport.update({
   path: '/productos',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedStockRoute = AuthenticatedStockRouteImport.update({
+  id: '/stock',
+  path: '/stock',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedVentaRoute = AuthenticatedVentaRouteImport.update({
   id: '/venta',
   path: '/venta',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/panel': typeof AuthenticatedPanelRoute
   '/productos': typeof AuthenticatedProductosRoute
+  '/stock': typeof AuthenticatedStockRoute
   '/venta': typeof AuthenticatedVentaRoute
   '/ventas': typeof AuthenticatedVentasRoute
 }
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/panel': typeof AuthenticatedPanelRoute
   '/productos': typeof AuthenticatedProductosRoute
+  '/stock': typeof AuthenticatedStockRoute
   '/venta': typeof AuthenticatedVentaRoute
   '/ventas': typeof AuthenticatedVentasRoute
 }
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/_authenticated/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/_authenticated/panel': typeof AuthenticatedPanelRoute
   '/_authenticated/productos': typeof AuthenticatedProductosRoute
+  '/_authenticated/stock': typeof AuthenticatedStockRoute
   '/_authenticated/venta': typeof AuthenticatedVentaRoute
   '/_authenticated/ventas': typeof AuthenticatedVentasRoute
 }
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
     | '/fotocopias'
     | '/panel'
     | '/productos'
+    | '/stock'
     | '/venta'
     | '/ventas'
   fileRoutesByTo: FileRoutesByTo
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
     | '/fotocopias'
     | '/panel'
     | '/productos'
+    | '/stock'
     | '/venta'
     | '/ventas'
   id:
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
     | '/_authenticated/fotocopias'
     | '/_authenticated/panel'
     | '/_authenticated/productos'
+    | '/_authenticated/stock'
     | '/_authenticated/venta'
     | '/_authenticated/ventas'
   fileRoutesById: FileRoutesById
@@ -168,6 +180,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProductosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/stock': {
+      id: '/_authenticated/stock'
+      path: '/stock'
+      fullPath: '/stock'
+      preLoaderRoute: typeof AuthenticatedStockRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/venta': {
       id: '/_authenticated/venta'
       path: '/venta'
@@ -189,6 +208,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedFotocopiasRoute: typeof AuthenticatedFotocopiasRoute
   AuthenticatedPanelRoute: typeof AuthenticatedPanelRoute
   AuthenticatedProductosRoute: typeof AuthenticatedProductosRoute
+  AuthenticatedStockRoute: typeof AuthenticatedStockRoute
   AuthenticatedVentaRoute: typeof AuthenticatedVentaRoute
   AuthenticatedVentasRoute: typeof AuthenticatedVentasRoute
 }
@@ -197,6 +217,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedFotocopiasRoute: AuthenticatedFotocopiasRoute,
   AuthenticatedPanelRoute: AuthenticatedPanelRoute,
   AuthenticatedProductosRoute: AuthenticatedProductosRoute,
+  AuthenticatedStockRoute: AuthenticatedStockRoute,
   AuthenticatedVentaRoute: AuthenticatedVentaRoute,
   AuthenticatedVentasRoute: AuthenticatedVentasRoute,
 }
