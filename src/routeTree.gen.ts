@@ -15,10 +15,12 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAuditoriaRouteImport } from './routes/_authenticated/auditoria'
 import { Route as AuthenticatedCajaRouteImport } from './routes/_authenticated/caja'
 import { Route as AuthenticatedComprasRouteImport } from './routes/_authenticated/compras'
+import { Route as AuthenticatedConfiguracionRouteImport } from './routes/_authenticated/configuracion'
 import { Route as AuthenticatedFotocopiasRouteImport } from './routes/_authenticated/fotocopias'
 import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
 import { Route as AuthenticatedProductosRouteImport } from './routes/_authenticated/productos'
 import { Route as AuthenticatedProveedoresRouteImport } from './routes/_authenticated/proveedores'
+import { Route as AuthenticatedReportesRouteImport } from './routes/_authenticated/reportes'
 import { Route as AuthenticatedReposicionRouteImport } from './routes/_authenticated/reposicion'
 import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
 import { Route as AuthenticatedUsuariosRouteImport } from './routes/_authenticated/usuarios'
@@ -54,6 +56,12 @@ const AuthenticatedComprasRoute = AuthenticatedComprasRouteImport.update({
   path: '/compras',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedConfiguracionRoute =
+  AuthenticatedConfiguracionRouteImport.update({
+    id: '/configuracion',
+    path: '/configuracion',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedFotocopiasRoute = AuthenticatedFotocopiasRouteImport.update({
   id: '/fotocopias',
   path: '/fotocopias',
@@ -75,6 +83,11 @@ const AuthenticatedProveedoresRoute =
     path: '/proveedores',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedReportesRoute = AuthenticatedReportesRouteImport.update({
+  id: '/reportes',
+  path: '/reportes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedReposicionRoute = AuthenticatedReposicionRouteImport.update({
   id: '/reposicion',
   path: '/reposicion',
@@ -107,10 +120,12 @@ export interface FileRoutesByFullPath {
   '/auditoria': typeof AuthenticatedAuditoriaRoute
   '/caja': typeof AuthenticatedCajaRoute
   '/compras': typeof AuthenticatedComprasRoute
+  '/configuracion': typeof AuthenticatedConfiguracionRoute
   '/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/panel': typeof AuthenticatedPanelRoute
   '/productos': typeof AuthenticatedProductosRoute
   '/proveedores': typeof AuthenticatedProveedoresRoute
+  '/reportes': typeof AuthenticatedReportesRoute
   '/reposicion': typeof AuthenticatedReposicionRoute
   '/stock': typeof AuthenticatedStockRoute
   '/usuarios': typeof AuthenticatedUsuariosRoute
@@ -123,10 +138,12 @@ export interface FileRoutesByTo {
   '/auditoria': typeof AuthenticatedAuditoriaRoute
   '/caja': typeof AuthenticatedCajaRoute
   '/compras': typeof AuthenticatedComprasRoute
+  '/configuracion': typeof AuthenticatedConfiguracionRoute
   '/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/panel': typeof AuthenticatedPanelRoute
   '/productos': typeof AuthenticatedProductosRoute
   '/proveedores': typeof AuthenticatedProveedoresRoute
+  '/reportes': typeof AuthenticatedReportesRoute
   '/reposicion': typeof AuthenticatedReposicionRoute
   '/stock': typeof AuthenticatedStockRoute
   '/usuarios': typeof AuthenticatedUsuariosRoute
@@ -141,10 +158,12 @@ export interface FileRoutesById {
   '/_authenticated/auditoria': typeof AuthenticatedAuditoriaRoute
   '/_authenticated/caja': typeof AuthenticatedCajaRoute
   '/_authenticated/compras': typeof AuthenticatedComprasRoute
+  '/_authenticated/configuracion': typeof AuthenticatedConfiguracionRoute
   '/_authenticated/fotocopias': typeof AuthenticatedFotocopiasRoute
   '/_authenticated/panel': typeof AuthenticatedPanelRoute
   '/_authenticated/productos': typeof AuthenticatedProductosRoute
   '/_authenticated/proveedores': typeof AuthenticatedProveedoresRoute
+  '/_authenticated/reportes': typeof AuthenticatedReportesRoute
   '/_authenticated/reposicion': typeof AuthenticatedReposicionRoute
   '/_authenticated/stock': typeof AuthenticatedStockRoute
   '/_authenticated/usuarios': typeof AuthenticatedUsuariosRoute
@@ -159,10 +178,12 @@ export interface FileRouteTypes {
     | '/auditoria'
     | '/caja'
     | '/compras'
+    | '/configuracion'
     | '/fotocopias'
     | '/panel'
     | '/productos'
     | '/proveedores'
+    | '/reportes'
     | '/reposicion'
     | '/stock'
     | '/usuarios'
@@ -175,10 +196,12 @@ export interface FileRouteTypes {
     | '/auditoria'
     | '/caja'
     | '/compras'
+    | '/configuracion'
     | '/fotocopias'
     | '/panel'
     | '/productos'
     | '/proveedores'
+    | '/reportes'
     | '/reposicion'
     | '/stock'
     | '/usuarios'
@@ -192,10 +215,12 @@ export interface FileRouteTypes {
     | '/_authenticated/auditoria'
     | '/_authenticated/caja'
     | '/_authenticated/compras'
+    | '/_authenticated/configuracion'
     | '/_authenticated/fotocopias'
     | '/_authenticated/panel'
     | '/_authenticated/productos'
     | '/_authenticated/proveedores'
+    | '/_authenticated/reportes'
     | '/_authenticated/reposicion'
     | '/_authenticated/stock'
     | '/_authenticated/usuarios'
@@ -253,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedComprasRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/configuracion': {
+      id: '/_authenticated/configuracion'
+      path: '/configuracion'
+      fullPath: '/configuracion'
+      preLoaderRoute: typeof AuthenticatedConfiguracionRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/fotocopias': {
       id: '/_authenticated/fotocopias'
       path: '/fotocopias'
@@ -279,6 +311,13 @@ declare module '@tanstack/react-router' {
       path: '/proveedores'
       fullPath: '/proveedores'
       preLoaderRoute: typeof AuthenticatedProveedoresRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reportes': {
+      id: '/_authenticated/reportes'
+      path: '/reportes'
+      fullPath: '/reportes'
+      preLoaderRoute: typeof AuthenticatedReportesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/reposicion': {
@@ -323,10 +362,12 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAuditoriaRoute: typeof AuthenticatedAuditoriaRoute
   AuthenticatedCajaRoute: typeof AuthenticatedCajaRoute
   AuthenticatedComprasRoute: typeof AuthenticatedComprasRoute
+  AuthenticatedConfiguracionRoute: typeof AuthenticatedConfiguracionRoute
   AuthenticatedFotocopiasRoute: typeof AuthenticatedFotocopiasRoute
   AuthenticatedPanelRoute: typeof AuthenticatedPanelRoute
   AuthenticatedProductosRoute: typeof AuthenticatedProductosRoute
   AuthenticatedProveedoresRoute: typeof AuthenticatedProveedoresRoute
+  AuthenticatedReportesRoute: typeof AuthenticatedReportesRoute
   AuthenticatedReposicionRoute: typeof AuthenticatedReposicionRoute
   AuthenticatedStockRoute: typeof AuthenticatedStockRoute
   AuthenticatedUsuariosRoute: typeof AuthenticatedUsuariosRoute
@@ -338,10 +379,12 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAuditoriaRoute: AuthenticatedAuditoriaRoute,
   AuthenticatedCajaRoute: AuthenticatedCajaRoute,
   AuthenticatedComprasRoute: AuthenticatedComprasRoute,
+  AuthenticatedConfiguracionRoute: AuthenticatedConfiguracionRoute,
   AuthenticatedFotocopiasRoute: AuthenticatedFotocopiasRoute,
   AuthenticatedPanelRoute: AuthenticatedPanelRoute,
   AuthenticatedProductosRoute: AuthenticatedProductosRoute,
   AuthenticatedProveedoresRoute: AuthenticatedProveedoresRoute,
+  AuthenticatedReportesRoute: AuthenticatedReportesRoute,
   AuthenticatedReposicionRoute: AuthenticatedReposicionRoute,
   AuthenticatedStockRoute: AuthenticatedStockRoute,
   AuthenticatedUsuariosRoute: AuthenticatedUsuariosRoute,
