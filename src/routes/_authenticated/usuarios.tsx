@@ -97,10 +97,11 @@ function Usuarios() {
       sortValue: (r) => r.email,
       cell: (r) => (
         <div>
-          <p className="font-medium">
-            {`${r.nombre} ${r.apellido}`.trim() || r.email}
-            {r.id === user?.id && <Badge className="ml-2" variant="secondary">vos</Badge>}
-          </p>
+          <div className="flex items-center gap-2 font-medium">
+            <span>{`${r.nombre} ${r.apellido}`.trim() || r.email}</span>
+            {r.id === user?.id && <Badge variant="secondary">vos</Badge>}
+          </div>
+
           <p className="text-xs text-muted-foreground">{r.email}</p>
         </div>
       ),
