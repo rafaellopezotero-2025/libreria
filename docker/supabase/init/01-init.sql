@@ -14,10 +14,10 @@ BEGIN
     CREATE ROLE service_role NOLOGIN NOINHERIT BYPASSRLS;
   END IF;
   IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'authenticator') THEN
-    EXECUTE format('CREATE ROLE authenticator LOGIN NOINHERIT PASSWORD %L', current_setting('custom.pgpassword', true));
+    CREATE ROLE authenticator LOGIN NOINHERIT;
   END IF;
   IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'supabase_auth_admin') THEN
-    EXECUTE format('CREATE ROLE supabase_auth_admin LOGIN CREATEROLE CREATEDB PASSWORD %L', current_setting('custom.pgpassword', true));
+    CREATE ROLE supabase_auth_admin LOGIN CREATEROLE CREATEDB;
   END IF;
 END
 $$;
@@ -25,8 +25,10 @@ $$;
 GRANT anon, authenticated, service_role TO authenticator;
 GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
 
+CREATE SCHEMA IF NOT EXISTS extensions;
 CREATE SCHEMA IF NOT EXISTS auth AUTHORIZATION supabase_auth_admin;
 GRANT USAGE ON SCHEMA auth TO anon, authenticated, service_role, postgres;
+GRANT ALL ON SCHEMA auth TO supabase_auth_admin;
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA extensions CASCADE;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA extensions CASCADE;
