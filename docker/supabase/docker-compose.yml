@@ -1,4 +1,4 @@
-« # Base de datos local para el sistema de librería/papelería.
+# Base de datos local para el sistema de librería/papelería.
 # Levanta: PostgreSQL + autenticación (GoTrue) + capa de datos (PostgREST) + Kong + Studio.
 # Uso:  cd docker/supabase && docker compose up -d
 services:
